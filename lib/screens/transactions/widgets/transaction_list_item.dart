@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transactions/common/helpers/app_formatter.dart';
 import 'package:transactions/models/models.dart';
 
 import '../../../common/navigation/app_route_names.dart';
@@ -46,7 +47,7 @@ class TransactionListItem extends StatelessWidget {
                 children: [
                   Text(formattedTransactionType),
                   Text(
-                    '${transaction.amount}\$',
+                    AppFormatter.currencyFormat(transaction.amount),
                     style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 18,
