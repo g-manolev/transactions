@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:transactions/models/models.dart';
 
+import '../../../common/navigation/app_route_names.dart';
+import '../../transaction_details/transaction_details_screen_args.dart';
+
 class TransactionListItem extends StatelessWidget {
   const TransactionListItem({
     super.key,
@@ -8,6 +11,13 @@ class TransactionListItem extends StatelessWidget {
   });
 
   final TransactionModel transaction;
+
+  void _onNavigateToTransactionDetails(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      AppRouteNames.transactionDetails,
+      arguments: TransactionDetailsScreenArguments(transaction: transaction),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +34,7 @@ class TransactionListItem extends StatelessWidget {
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(8),
-        onTap: () {},
+        onTap: () => _onNavigateToTransactionDetails(context),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
