@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:transactions/blocs/transactions/transactions_bloc.dart';
 
 import '../../screens/screens.dart';
 
@@ -26,7 +28,12 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: _screens[_selectedTabIndex]),
+      body: BlocProvider<TransactionsBloc>(
+        create: (context) => TransactionsBloc()..add(TransactionsLoadEvent()),
+        child: SafeArea(
+          child: _screens[_selectedTabIndex],
+        ),
+      ),
       bottomNavigationBar: _bottomNavigationBar(),
     );
   }

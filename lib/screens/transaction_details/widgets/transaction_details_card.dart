@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:transactions/common/helpers/app_formatter.dart';
 
-import '../../../models/transaction/transaction.dart';
+import '../../../models/transaction/transaction_model.dart';
 
 class TransactionDetailsCard extends StatelessWidget {
   const TransactionDetailsCard({super.key, required this.transaction});

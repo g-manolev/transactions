@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:transactions/common/navigation/app_route_names.dart';
 import 'package:transactions/common/theme/app_theme.dart';
+import 'package:transactions/hive/hive_box_helper.dart';
+import 'package:transactions/models/models.dart';
 
 import 'common/navigation/app_navigation.dart';
 
-void main() {
+Future<void> initHive() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(TransactionAdapter());
+  Hive.registerAdapter(TransactionTypeAdapter());
+  await HiveBoxHelper.init();
+}
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initHive();
+
   runApp(const MyApp());
 }
 

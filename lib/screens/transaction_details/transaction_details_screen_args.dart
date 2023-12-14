@@ -1,4 +1,4 @@
-import '../../models/transaction/transaction.dart';
+import '../../models/transaction/transaction_model.dart';
 
 class TransactionDetailsScreenArguments {
   final TransactionModel transaction;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:transactions/screens/transaction_details/widgets/transaction_details_card.dart';
 
-import '../../models/transaction/transaction.dart';
+import '../../models/transaction/transaction_model.dart';
 
 class TransactionDetailsScreen extends StatelessWidget {
   const TransactionDetailsScreen({super.key, required this.transaction});
