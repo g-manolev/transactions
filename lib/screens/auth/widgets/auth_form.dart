@@ -31,6 +31,7 @@ class AuthForm extends StatelessWidget {
             controller: emailController,
             textInputAction: TextInputAction.next,
             validatorText: 'Please enter email',
+            autofocus: true,
           ),
           const SizedBox(height: 16),
           AppTextInput(

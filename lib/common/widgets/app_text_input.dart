@@ -8,6 +8,7 @@ class AppTextInput extends StatelessWidget {
     required this.validatorText,
     this.textInputAction,
     this.obscureText,
+    this.autofocus,
     this.onFieldSubmitted,
   });
 
@@ -16,6 +17,7 @@ class AppTextInput extends StatelessWidget {
   final String validatorText;
   final TextInputAction? textInputAction;
   final bool? obscureText;
+  final bool? autofocus;
   final void Function(String)? onFieldSubmitted;
 
   @override
@@ -28,6 +30,7 @@ class AppTextInput extends StatelessWidget {
       ),
       controller: controller,
       obscureText: obscureText ?? false,
+      autofocus: autofocus ?? false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value == null || value.isEmpty) {
