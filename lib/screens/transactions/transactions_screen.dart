@@ -15,15 +15,19 @@ class TransactionsScreen extends StatelessWidget {
         }
 
         if (state is TransactionsLoadedState) {
-          return ListView.builder(
-            itemCount: state.transactions.length,
-            padding: const EdgeInsets.all(8),
-            itemBuilder: (context, index) {
-              return TransactionListItem(
-                transaction: state.transactions[index],
-              );
-            },
-          );
+          final transactions = state.transactions;
+
+          return transactions.isNotEmpty
+              ? ListView.builder(
+                  itemCount: state.transactions.length,
+                  padding: const EdgeInsets.all(8),
+                  itemBuilder: (context, index) {
+                    return TransactionListItem(
+                      transaction: state.transactions[index],
+                    );
+                  },
+                )
+              : const Center(child: Text('No transactions'));
         }
 
         return const Center(child: CircularProgressIndicator());
