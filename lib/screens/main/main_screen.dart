@@ -35,7 +35,10 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: _screens[_selectedTabIndex],
+        child: IndexedStack(
+          index: _selectedTabIndex,
+          children: _screens,
+        ),
       ),
       bottomNavigationBar: _bottomNavigationBar(),
     );
