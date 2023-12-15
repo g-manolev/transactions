@@ -45,16 +45,31 @@ class _MainScreenState extends State<MainScreen> {
     return BottomNavigationBar(
       currentIndex: _selectedTabIndex,
       onTap: _onSelectTab,
-      items: const [
+      items: [
         BottomNavigationBarItem(
           label: 'Transactions',
-          icon: Icon(Icons.list_rounded),
+          icon: _transactionNavBarIcon(),
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           label: 'Chart',
           icon: Icon(Icons.pie_chart),
         ),
       ],
+    );
+  }
+
+  Widget _transactionNavBarIcon() {
+    return BlocBuilder<TransactionsBloc, TransactionsState>(
+      builder: (context, state) {
+        if (state is TransactionsLoadedState) {
+          return Badge(
+            label: Text('${state.transactions.length}'),
+            child: const Icon(Icons.list_rounded),
+          );
+        }
+
+        return const Icon(Icons.list_rounded);
+      },
     );
   }
 }
