@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:transactions/common/navigation/app_route_names.dart';
 import 'package:transactions/common/theme/app_theme.dart';
 import 'package:transactions/hive/hive_box_helper.dart';
 import 'package:transactions/models/models.dart';
 
+import 'blocs/transactions/transactions_bloc.dart';
 import 'common/navigation/app_navigation.dart';
 
 Future<void> initHive() async {
@@ -28,11 +30,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      routes: appNavigation.routes,
-      initialRoute: AppRouteNames.auth,
+    return BlocProvider(
+      create: (context) => TransactionsBloc(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        routes: appNavigation.routes,
+        initialRoute: AppRouteNames.auth,
+      ),
     );
   }
 }

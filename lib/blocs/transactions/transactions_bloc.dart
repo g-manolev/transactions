@@ -11,9 +11,10 @@ part 'transactions_state.dart';
 class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
   TransactionsBloc() : super(TransactionsInitialState()) {
     on<TransactionsLoadEvent>(_getTransactionsList);
+    on<CancelTransactionEvent>(_cancelTransaction);
   }
 
-  _getTransactionsList(
+  Future<void> _getTransactionsList(
     TransactionsLoadEvent event,
     Emitter<TransactionsState> emit,
   ) async {
@@ -25,7 +26,22 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
 
       final transactions = HiveBoxHelper.getTransactions();
 
-      emit(TransactionsLoadedState(transactions));
+      emit(TransactionsLoadedState(transactions: [...transactions]));
+    } catch (e) {
+      emit(TransactionsErrorState(e.toString()));
+    }
+  }
+
+  Future<void> _cancelTransaction(
+    CancelTransactionEvent event,
+    Emitter<TransactionsState> emit,
+  ) async {
+    try {
+      await HiveBoxHelper.cancelTransaction(event.transactionNumber);
+
+      final transactions = HiveBoxHelper.getTransactions();
+
+      emit(TransactionsLoadedState(transactions: [...transactions]));
     } catch (e) {
       emit(TransactionsErrorState(e.toString()));
     }

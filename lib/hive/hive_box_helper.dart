@@ -18,6 +18,21 @@ class HiveBoxHelper {
 
   static List<TransactionModel> getTransactions() {
     final transactionsBox = Hive.box(HiveKeys.transactionsBox);
+
     return transactionsBox.get(HiveKeys.transactionsList);
+  }
+
+  static Future<void> cancelTransaction(
+    int transactionNumber,
+  ) async {
+    final transactionsBox = Hive.box(HiveKeys.transactionsBox);
+
+    final List<TransactionModel> transactionsList =
+        transactionsBox.get(HiveKeys.transactionsList);
+
+    transactionsList.removeWhere(
+        (transaction) => transaction.transactionNumber == transactionNumber);
+
+    await transactionsBox.put(HiveKeys.transactionsBox, transactionsList);
   }
 }

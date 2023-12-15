@@ -26,13 +26,16 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    context.read<TransactionsBloc>().add(TransactionsLoadEvent());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider<TransactionsBloc>(
-        create: (context) => TransactionsBloc()..add(TransactionsLoadEvent()),
-        child: SafeArea(
-          child: _screens[_selectedTabIndex],
-        ),
+      body: SafeArea(
+        child: _screens[_selectedTabIndex],
       ),
       bottomNavigationBar: _bottomNavigationBar(),
     );
